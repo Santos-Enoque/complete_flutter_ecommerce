@@ -1,54 +1,22 @@
-import 'package:chat_app/pages/signup.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'home.dart';
+import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
+class SignUp extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _nameTextController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
+  String gender;
 
-  SharedPreferences preferences;
   bool loading = false;
-  bool isLogedin = false;
 
-  @override
-  void initState() {
-    super.initState();
-//    isSignedIn();
-  }
-
-  void isSignedIn() async {
-    setState(() {
-      loading = true;
-    });
-
-
-    if (isLogedin) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
-    }
-
-    setState(() {
-      loading = false;
-    });
-  }
-
-//  Future handleSignIn() async {
-//    setState(() {
-//      loading = true;
-//    });
-//  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +51,32 @@ class _LoginState extends State<Login> {
                     child: ListView(
                       children: <Widget>[
                         Padding(
+                          padding:
+                          const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                          child: Material(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.white.withOpacity(0.4),
+                            elevation: 0.0,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: TextFormField(
+                                controller: _nameTextController,
+                                decoration: InputDecoration(
+                                  hintText: "Full name",
+                                  icon: Icon(Icons.person_outline),
+                                ),
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "The name field cannot be empty";
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Padding(
                           padding: const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
@@ -114,7 +108,7 @@ class _LoginState extends State<Login> {
 
                         Padding(
                           padding:
-                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                          const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
                             color: Colors.white.withOpacity(0.4),
@@ -142,16 +136,44 @@ class _LoginState extends State<Login> {
 
                         Padding(
                           padding:
-                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                          const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                          child: Material(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.white.withOpacity(0.4),
+                            elevation: 0.0,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: TextFormField(
+                                controller: _confirmPasswordController,
+                                decoration: InputDecoration(
+                                  hintText: "Confirm password",
+                                  icon: Icon(Icons.lock_outline),
+                                ),
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "The password field cannot be empty";
+                                  } else if (value.length < 6) {
+                                    return "the password has to be at least 6 characters long";
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Padding(
+                          padding:
+                          const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                               borderRadius: BorderRadius.circular(20.0),
-                              color: Colors.red.shade700,
+                              color: Colors.blue.shade700,
                               elevation: 0.0,
                               child: MaterialButton(
                                 onPressed: () {},
                                 minWidth: MediaQuery.of(context).size.width,
                                 child: Text(
-                                  "Login",
+                                  "Register",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white,
@@ -160,26 +182,14 @@ class _LoginState extends State<Login> {
                                 ),
                               )),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Forgot password",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-//                          Expanded(child: Container()),
 
                         Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: InkWell(
                                 onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+                                  Navigator.pop(context);
                                 },
-                                child: Text("Sign up", textAlign: TextAlign.center, style: TextStyle(color: Colors.red),))
+                                child: Text("Login",textAlign: TextAlign.center, style: TextStyle(color: Colors.red),))
                         ),
                       ],
                     )),
