@@ -14,6 +14,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
   final _formKey = GlobalKey<FormState>();
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
@@ -21,6 +22,7 @@ class _LoginState extends State<Login> {
   SharedPreferences preferences;
   bool loading = false;
   bool isLogedin = false;
+
 
   @override
   void initState() {
