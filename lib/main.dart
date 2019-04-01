@@ -9,6 +9,6 @@ void main() {
     theme: ThemeData(
       primaryColor: Colors.red.shade900
     ),
-    home: HomePage(),
+    home: Login(),
   ));
 }

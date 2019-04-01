@@ -253,7 +253,6 @@ class _SignUpState extends State<SignUp> {
     FormState formState = _formKey.currentState;
 
     if (formState.validate()) {
-      formState.reset();
       FirebaseUser user = await firebaseAuth.currentUser();
       if (user == null) {
         firebaseAuth
@@ -269,7 +268,7 @@ class _SignUpState extends State<SignUp> {
             "gender": gender,
             }
         )
-        }).catchError((err) => {print(err.toString())});
+        }).catchError((err) => {print('error is: '+ err.toString())});
 
     Navigator.pushReplacement(
     context, MaterialPageRoute(builder: (context) => HomePage()));

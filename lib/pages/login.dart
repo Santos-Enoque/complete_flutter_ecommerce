@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-//    isSignedIn();
+    isSignedIn();
   }
 
   void isSignedIn() async {
@@ -35,7 +35,11 @@ class _LoginState extends State<Login> {
       loading = true;
     });
 
-
+    await firebaseAuth.currentUser().then((user){
+        if(user != null){
+          setState(() => isLogedin = true);
+        }
+    });
     if (isLogedin) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => HomePage()));
