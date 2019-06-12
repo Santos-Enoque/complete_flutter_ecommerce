@@ -23,7 +23,6 @@ class _LoginState extends State<Login> {
   bool loading = false;
   bool isLogedin = false;
 
-
   @override
   void initState() {
     super.initState();
@@ -35,10 +34,10 @@ class _LoginState extends State<Login> {
       loading = true;
     });
 
-    await firebaseAuth.currentUser().then((user){
-        if(user != null){
-          setState(() => isLogedin = true);
-        }
+    await firebaseAuth.currentUser().then((user) {
+      if (user != null) {
+        setState(() => isLogedin = true);
+      }
     });
     if (isLogedin) {
       Navigator.pushReplacement(
@@ -60,45 +59,40 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height / 3;
     return Scaffold(
-      body: Stack(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Image.asset(
-            'images/back.jpg',
-            fit: BoxFit.fill,
-            width: double.infinity,
-            height: double.infinity,
+          Padding(
+            padding: const EdgeInsets.all(28.0),
+            child: Container(
+                alignment: Alignment.topCenter,
+                child: Image.asset(
+                  'images/cart.png',
+                  width: 120.0,
+//                height: 240.0,
+                )),
           ),
-          Container(
-            color: Colors.black.withOpacity(0.8),
-            width: double.infinity,
-            height: double.infinity,
-          ),
-          Container(
-              alignment: Alignment.topCenter,
-              child: Image.asset(
-                'images/lg.png',
-                width: 280.0,
-                height: 240.0,
-              )),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 200.0),
+              padding: const EdgeInsets.only(top: 0.0),
               child: Center(
                 child: Form(
                     key: _formKey,
-                    child: ListView(
+                    child: Column(
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                          padding:
+                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.white.withOpacity(0.4),
+                            color: Colors.grey.withOpacity(0.2),
                             elevation: 0.0,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12.0),
                               child: TextFormField(
                                 controller: _emailTextController,
                                 decoration: InputDecoration(
+                                  border: InputBorder.none,
                                   hintText: "Email",
                                   icon: Icon(Icons.alternate_email),
                                 ),
@@ -117,19 +111,19 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                         ),
-
                         Padding(
                           padding:
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.white.withOpacity(0.4),
+                            color: Colors.grey.withOpacity(0.2),
                             elevation: 0.0,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12.0),
                               child: TextFormField(
                                 controller: _passwordTextController,
                                 decoration: InputDecoration(
+                                  border: InputBorder.none,
                                   hintText: "Password",
                                   icon: Icon(Icons.lock_outline),
                                 ),
@@ -145,13 +139,12 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                         ),
-
                         Padding(
                           padding:
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                               borderRadius: BorderRadius.circular(20.0),
-                              color: Colors.red.shade700,
+                              color: Colors.deepOrange,
                               elevation: 0.0,
                               child: MaterialButton(
                                 onPressed: () {},
@@ -166,29 +159,88 @@ class _LoginState extends State<Login> {
                                 ),
                               )),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Forgot password",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Forgot password",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
                             ),
-                          ),
+                            Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => SignUp()));
+                                    },
+                                    child: Text(
+                                      "Create an account",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(color: Colors.black),
+                                    ))),
+                          ],
                         ),
-//                          Expanded(child: Container()),
 
                         Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                                onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
-                                },
-                                child: Text("Sign up", textAlign: TextAlign.center, style: TextStyle(color: Colors.red),))
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Divider(),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text("Or", style: TextStyle(fontSize: 20,color: Colors.grey),),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Divider(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Padding(
+                              padding:
+                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                              child: Material(
+                                  child: MaterialButton(
+                                      onPressed: () {},
+                                      child: Image.asset("images/fb.png", width: 60,)
+                                  )),
+                            ),
+
+                            Padding(
+                              padding:
+                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                              child: Material(
+                                  child: MaterialButton(
+                                    onPressed: () {},
+                                    child: Image.asset("images/ggg.png", width: 60,)
+                                  )),
+                            ),
+                          ],
+                        ),
+
                       ],
                     )),
+
               ),
             ),
           ),
