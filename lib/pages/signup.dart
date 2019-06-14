@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:chat_app/commons/common.dart';
+import 'package:chat_app/db/auth.dart';
 import 'package:chat_app/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,7 @@ class _SignUpState extends State<SignUp> {
   String groupValue = "male";
   bool hidePass = true;
   bool loading = false;
+  Auth auth = Auth();
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +152,7 @@ class _SignUpState extends State<SignUp> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                               borderRadius: BorderRadius.circular(20.0),
-                              color: Colors.deepOrange,
+                              color: deepOrange,
                               elevation: 0.0,
                               child: MaterialButton(
                                 onPressed: () async{
@@ -160,7 +163,7 @@ class _SignUpState extends State<SignUp> {
                                   "Sign up",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20.0),
                                 ),
@@ -175,7 +178,7 @@ class _SignUpState extends State<SignUp> {
                                 child: Text(
                                   "I already have an account",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.deepOrange, fontSize: 16),
+                                  style: TextStyle(color: deepOrange, fontSize: 16),
                                 ))),
 
                         Padding(
@@ -219,7 +222,18 @@ class _SignUpState extends State<SignUp> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                               child: Material(
                                   child: MaterialButton(
-                                      onPressed: () {},
+                                      onPressed: () async{
+                                       FirebaseUser user = await auth.googleSignIn();
+                                       if(user == null){
+                                         _userServices.createUser({
+                                           "name": user.displayName,
+                                           "photo": user.photoUrl,
+                                           "email": user.email,
+                                           "userId": user.uid
+                                         });
+                                         changeScreenReplacement(context, HomePage());
+                                       }
+                                      },
                                       child: Image.asset("images/ggg.png", width: 60,)
                                   )),
                             ),

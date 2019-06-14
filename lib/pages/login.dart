@@ -1,3 +1,4 @@
+import 'package:chat_app/commons/common.dart';
 import 'package:chat_app/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,11 +50,7 @@ class _LoginState extends State<Login> {
     });
   }
 
-//  Future handleSignIn() async {
-//    setState(() {
-//      loading = true;
-//    });
-//  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +141,7 @@ class _LoginState extends State<Login> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                               borderRadius: BorderRadius.circular(20.0),
-                              color: Colors.deepOrange,
+                              color: deepOrange,
                               elevation: 0.0,
                               child: MaterialButton(
                                 onPressed: () {},
@@ -168,7 +165,7 @@ class _LoginState extends State<Login> {
                                 "Forgot password",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: black,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
