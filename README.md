@@ -1,16 +1,20 @@
-# chat_app
+# Flutter ecommerce 
 
-A new Flutter application.
+This is a flutter ecommerce app (still under development), and is only the user side of the app, 
+to check the admin side [Click here](https://flutter.io/docs/get-started/codelab).
 
-## Getting Started
+## Login Scren
 
-This project is a starting point for a Flutter application.
+Here we have the current UI for the user login (the Ui might be updated).
+<img src="images/img1.png">
 
-A few resources to get you started if this is your first Flutter project:
+## home page
+<img src="images/img.png">
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+## Authors Information
+My name is Santos Enoque, I am a flutter and python developer, for more information please check the links bellow.
+
+- [Youtube: Santos Enoque](https://www.youtube.com/channel/UCRl79zOEtiLCglAFZJJzEZQ)
+- [LinkedIn: Santos Enoque](www.linkedin.com/in/santos-enoque)
+- Skype: santos enoque
