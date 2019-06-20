@@ -56,27 +56,40 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height / 3;
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(28.0),
-            child: Container(
-                alignment: Alignment.topCenter,
-                child: Image.asset(
-                  'images/cart.png',
-                  width: 120.0,
-//                height: 240.0,
-                )),
-          ),
-          Center(
+
+          Container(
             child: Padding(
-              padding: const EdgeInsets.only(top: 0.0),
-              child: Center(
+              padding: const EdgeInsets.only(left:20, right:20.0, top: 120, bottom: 120),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey[350],
+                      blurRadius:
+                      20.0, // has the effect of softening the shadow
+                    )
+                  ],
+                ),
                 child: Form(
                     key: _formKey,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Container(
+                              alignment: Alignment.topCenter,
+                              child: Image.asset(
+                                'images/cart.png',
+                                width: 120.0,
+//                height: 240.0,
+                              )),
+                        ),
+
                         Padding(
                           padding:
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
@@ -192,47 +205,21 @@ class _LoginState extends State<Login> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
+
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Divider(),
+                                child: Text("or sign in with", style: TextStyle(fontSize: 18,color: Colors.grey),),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text("Or", style: TextStyle(fontSize: 20,color: Colors.grey),),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Divider(
-                                  color: Colors.black,
+                                child: MaterialButton(
+                                    onPressed: () {},
+                                    child: Image.asset("images/ggg.png", width: 30,)
                                 ),
                               ),
+
                             ],
                           ),
-                        ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
-                              child: Material(
-                                  child: MaterialButton(
-                                      onPressed: () {},
-                                      child: Image.asset("images/fb.png", width: 60,)
-                                  )),
-                            ),
-
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
-                              child: Material(
-                                  child: MaterialButton(
-                                    onPressed: () {},
-                                    child: Image.asset("images/ggg.png", width: 60,)
-                                  )),
-                            ),
-                          ],
                         ),
 
                       ],

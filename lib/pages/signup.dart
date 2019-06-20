@@ -32,8 +32,19 @@ class _SignUpState extends State<SignUp> {
       body: Stack(
         children: <Widget>[
          Padding(
-              padding: const EdgeInsets.only(top: 0.0),
-              child: Center(
+              padding: const EdgeInsets.only(left:20, right:20.0, top: 120, bottom: 120),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey[350],
+                      blurRadius:
+                      20.0, // has the effect of softening the shadow
+                    )
+                  ],
+                ),
                 child: Form(
                     key: _formKey,
                     child: Column(
@@ -186,58 +197,33 @@ class _SignUpState extends State<SignUp> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
+
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Divider(),
+                                child: Text("Or sign up with", style: TextStyle(fontSize: 18,color: Colors.grey),),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("Or Sing up with", style: TextStyle(fontSize: 20,color: Colors.grey),),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Divider(
-                                  color: Colors.black,
-                                ),
+                                padding:
+                                const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                                child: Material(
+                                    child: MaterialButton(
+                                        onPressed: () async{
+                                          FirebaseUser user = await auth.googleSignIn();
+                                          if(user == null){
+                                            _userServices.createUser({
+                                              "name": user.displayName,
+                                              "photo": user.photoUrl,
+                                              "email": user.email,
+                                              "userId": user.uid
+                                            });
+                                            changeScreenReplacement(context, HomePage());
+                                          }
+                                        },
+                                        child: Image.asset("images/ggg.png", width: 30,)
+                                    )),
                               ),
                             ],
                           ),
-                        ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
-                              child: Material(
-                                  child: MaterialButton(
-                                      onPressed: () {},
-                                      child: Image.asset("images/fb.png", width: 60,)
-                                  )),
-                            ),
-
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
-                              child: Material(
-                                  child: MaterialButton(
-                                      onPressed: () async{
-                                       FirebaseUser user = await auth.googleSignIn();
-                                       if(user == null){
-                                         _userServices.createUser({
-                                           "name": user.displayName,
-                                           "photo": user.photoUrl,
-                                           "email": user.email,
-                                           "userId": user.uid
-                                         });
-                                         changeScreenReplacement(context, HomePage());
-                                       }
-                                      },
-                                      child: Image.asset("images/ggg.png", width: 60,)
-                                  )),
-                            ),
-                          ],
                         ),
                       ],
                     )),
@@ -288,7 +274,6 @@ class _SignUpState extends State<SignUp> {
             "username": _nameTextController.text,
             "email": _emailTextController.text,
             "userId": user.uid,
-            "gender": gender,
             }
         )
         }).catchError((err) => {print('error is: '+ err.toString())});

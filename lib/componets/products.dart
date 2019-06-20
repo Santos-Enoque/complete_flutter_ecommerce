@@ -1,3 +1,4 @@
+import 'package:chat_app/commons/common.dart';
 import 'package:flutter/material.dart';
 
 class Products extends StatefulWidget {
@@ -9,51 +10,36 @@ class _ProductsState extends State<Products> {
   var product_list = [
     {
       "name": "Blazer",
-      "picture": "images/products/blazer1.jpeg",
+      "picture": "images/w4.jpeg",
       "old_price": 120,
       "price": 85,
     },
     {
       "name": "Red dress",
-      "picture": "images/products/dress1.jpeg",
+      "picture": "images/m2.jpg",
       "old_price": 100,
       "price": 50,
+    },{
+      "name": "Blazer",
+      "picture": "images/m1.jpeg",
+      "old_price": 120,
+      "price": 85,
     },
     {
       "name": "Red dress",
-      "picture": "images/products/dress1.jpeg",
+      "picture": "images/w3.jpeg",
       "old_price": 100,
       "price": 50,
     },
-    {
-      "name": "Red dress",
-      "picture": "images/products/dress1.jpeg",
-      "old_price": 100,
-      "price": 50,
-    },
-    {
-      "name": "Red dress",
-      "picture": "images/products/dress1.jpeg",
-      "old_price": 100,
-      "price": 50,
-    },
-    {
-      "name": "Red dress",
-      "picture": "images/products/dress1.jpeg",
-      "old_price": 100,
-      "price": 50,
-    },
-    {
-      "name": "Red dress",
-      "picture": "images/products/dress1.jpeg",
-      "old_price": 100,
-      "price": 50,
-    }
+
+
   ];
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
         itemCount: product_list.length,
         gridDelegate:
         new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
@@ -86,41 +72,46 @@ class Single_prod extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Hero(
-          tag: prod_name,
-          child: Material(
-            child: InkWell(
-              onTap: () {},
-              child: GridTile(
-                  footer: Container(
-                    color: Colors.white70,
-                    child: ListTile(
-                        leading: Text(
-                          prod_name,
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        title: Text(
-                          "\$$prod_price",
-                          style: TextStyle(
-                              color: Colors.red, fontWeight: FontWeight.w800),
-                        ),
-                        subtitle: Text(
-                          "\$$prod_old_price",
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w800,
-                              decoration
-                                  :TextDecoration.lineThrough),
-                        ),
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(40),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey[350],
+                blurRadius:
+                10.0, // has the effect of softening the shadow
+              )
+            ],
+          ),
+            child: Material(
+              borderRadius: BorderRadius.circular(40),
+              child: InkWell(
+                onTap: () {},
+                child: GridTile(
+                    footer: Container(
+                      color: Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Text(prod_name, style: TextStyle(fontSize: 18, color: black),),
+                          Text(
+                            "\$$prod_price",
+                            style: TextStyle(
+                                color: deepOrange,fontSize: 20, fontWeight: FontWeight.w800),
+                          ),
+                        ],
+                      )
                     ),
-                  ),
-                  child: Image.asset(
-                    prod_pricture,
-                    fit: BoxFit.cover,
-                  )),
-            ),
-          )),
+                    child: Image.asset(
+                      prod_pricture,
+                      fit: BoxFit.cover,
+                    )),
+              ),
+            )
+      ),
     );
   }
 }

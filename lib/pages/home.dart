@@ -1,3 +1,4 @@
+import 'package:chat_app/commons/common.dart';
 import 'package:chat_app/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController _searchController =  TextEditingController();
   @override
   Widget build(BuildContext context) {
     Widget image_carousel = new Container(
@@ -20,15 +22,14 @@ class _HomePageState extends State<HomePage> {
       child:  new Carousel(
         boxFit: BoxFit.cover,
         images: [
-          AssetImage('images/w3.jpeg'),
-          AssetImage('images/m1.jpeg'),
+          AssetImage('images/1.jpg'),
+          AssetImage('images/sale.png'),
           AssetImage('images/c1.jpg'),
           AssetImage('images/w4.jpeg'),
           AssetImage('images/m2.jpg'),
         ],
         autoplay: false,
-//      animationCurve: Curves.fastOutSlowIn,
-//      animationDuration: Duration(milliseconds: 1000),
+        dotBgColor: Colors.transparent,
         dotSize: 4.0,
         indicatorBgPadding: 2.0,
       ),
@@ -36,20 +37,33 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: new AppBar(
+        iconTheme: IconThemeData(color: deepOrange),
         elevation: 0.1,
-        backgroundColor: Colors.red.shade900,
-        title: Text('Fashapp'),
+        backgroundColor: white,
+        title: Material(
+          borderRadius: BorderRadius.circular(10.0),
+          color: Colors.grey[100],
+          elevation: 0.0,
+          child: TextFormField(
+            controller: _searchController,
+            decoration: InputDecoration(
+                contentPadding: const EdgeInsets.all(10.0),
+                hintText: "Search...",
+                border: InputBorder.none),
+            validator: (value) {
+              if (value.isEmpty) {
+                return "The search field cannot be empty";
+              }
+              return null;
+            },
+          ),
+        ),
         actions: <Widget>[
-          new IconButton(
-              icon: Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-              onPressed: () {}),
+
           new IconButton(
               icon: Icon(
                 Icons.shopping_cart,
-                color: Colors.white,
+                color: deepOrange,
               ),
               onPressed: () {})
         ],
@@ -68,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               decoration: new BoxDecoration(
-                  color: Colors.red.shade900
+                  color: deepOrange
               ),
             ),
 
@@ -135,22 +149,26 @@ class _HomePageState extends State<HomePage> {
       body: new Column(
         children: <Widget>[
           //image carousel begins here
-//          image_carousel,
+          image_carousel,
+
+//          //padding widget
+//          new Padding(padding: const EdgeInsets.all(4.0),
+//            child: Container(
+//                alignment: Alignment.centerLeft,
+//                child: new Text('Categories')),),
+//
+//          //Horizontal list view begins here
+//          HorizontalList(),
 
           //padding widget
-          new Padding(padding: const EdgeInsets.all(4.0),
-            child: Container(
-                alignment: Alignment.centerLeft,
-                child: new Text('Categories')),),
-
-          //Horizontal list view begins here
-          HorizontalList(),
-
-          //padding widget
-          new Padding(padding: const EdgeInsets.all(8.0),
-            child: Container(
-                alignment: Alignment.centerLeft,
-                child: new Text('Recent products')),),
+          Row(
+            children: <Widget>[
+               Padding(padding: const EdgeInsets.all(14.0),
+                child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: new Text('Recent products')),),
+            ],
+          ),
 
           //grid view
           Flexible(child: Products()),
