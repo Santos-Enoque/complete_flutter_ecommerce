@@ -1,7 +1,7 @@
 # Flutter ecommerce 
 
 This is a flutter ecommerce app (still under development), and is only the user side of the app, 
-to check the admin side [Click here](https://flutter.io/docs/get-started/codelab).
+to check the admin side [Click here](https://github.com/Santos-Enoque/admin_side_flutter_ecommerce_app/tree/add_product).
 
 ## Login Scren
 
