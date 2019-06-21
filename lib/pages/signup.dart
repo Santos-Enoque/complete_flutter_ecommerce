@@ -1,10 +1,13 @@
 import 'dart:async';
 
 import 'package:chat_app/commons/common.dart';
+import 'package:chat_app/commons/loading.dart';
 import 'package:chat_app/db/auth.dart';
 import 'package:chat_app/pages/home.dart';
+import 'package:chat_app/provider/user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../db/users.dart';
 
 class SignUp extends StatefulWidget {
@@ -13,26 +16,24 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
-  UserServices _userServices = UserServices();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _nameTextController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
-  String gender;
-  String groupValue = "male";
+  final _key = GlobalKey<ScaffoldState>();
+
+  TextEditingController _email = TextEditingController();
+  TextEditingController _password = TextEditingController();
+  TextEditingController _name = TextEditingController();
   bool hidePass = true;
-  bool loading = false;
-  Auth auth = Auth();
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
+
     return Scaffold(
-      body: Stack(
+      key: _key,
+      body: user.status == Status.Authenticating ? Loading() : Stack(
         children: <Widget>[
          Padding(
-              padding: const EdgeInsets.only(left:20, right:20.0, top: 120, bottom: 120),
+              padding: const EdgeInsets.only(left:20, right:20.0, top: 80),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -71,7 +72,7 @@ class _SignUpState extends State<SignUp> {
                               padding: const EdgeInsets.only(left: 12.0),
                               child: ListTile(
                                 title: TextFormField(
-                                  controller: _nameTextController,
+                                  controller: _name,
                                   decoration: InputDecoration(
                                       hintText: "Full name",
                                       icon: Icon(Icons.person_outline),
@@ -98,7 +99,7 @@ class _SignUpState extends State<SignUp> {
                               padding: const EdgeInsets.only(left: 12.0),
                               child: ListTile(
                                 title: TextFormField(
-                                  controller: _emailTextController,
+                                  controller: _email,
                                   decoration: InputDecoration(
                                       hintText: "Email",
                                       icon: Icon(Icons.alternate_email),
@@ -131,7 +132,7 @@ class _SignUpState extends State<SignUp> {
                               padding: const EdgeInsets.only(left: 12.0),
                               child: ListTile(
                                 title: TextFormField(
-                                  controller: _passwordTextController,
+                                  controller: _password,
                                   obscureText: hidePass,
                                   decoration: InputDecoration(
                                       hintText: "Password",
@@ -167,7 +168,10 @@ class _SignUpState extends State<SignUp> {
                               elevation: 0.0,
                               child: MaterialButton(
                                 onPressed: () async{
-                                  validateForm();
+                                  if(_formKey.currentState.validate()){
+                                    if(!await user.signUp(_name.text ,_email.text, _password.text))
+                                      _key.currentState.showSnackBar(SnackBar(content: Text("Sign up failed")));
+                                  }
                                 },
                                 minWidth: MediaQuery.of(context).size.width,
                                 child: Text(
@@ -208,16 +212,6 @@ class _SignUpState extends State<SignUp> {
                                 child: Material(
                                     child: MaterialButton(
                                         onPressed: () async{
-                                          FirebaseUser user = await auth.googleSignIn();
-                                          if(user == null){
-                                            _userServices.createUser({
-                                              "name": user.displayName,
-                                              "photo": user.photoUrl,
-                                              "email": user.email,
-                                              "userId": user.uid
-                                            });
-                                            changeScreenReplacement(context, HomePage());
-                                          }
                                         },
                                         child: Image.asset("images/ggg.png", width: 30,)
                                     )),
@@ -229,59 +223,9 @@ class _SignUpState extends State<SignUp> {
                     )),
               ),
             ),
-          Visibility(
-            visible: loading ?? true,
-            child: Center(
-              child: Container(
-                alignment: Alignment.center,
-                color: Colors.white.withOpacity(0.9),
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
-                ),
-              ),
-            ),
-          )
         ],
       ),
     );
   }
 
-  valueChanged(e) {
-    setState(() {
-      if (e == "male") {
-        groupValue = e;
-        gender = e;
-      } else if (e == "female") {
-        groupValue = e;
-        gender = e;
-      }
-    });
-  }
-
-  Future validateForm() async {
-    FormState formState = _formKey.currentState;
-
-    if (formState.validate()) {
-      FirebaseUser user = await firebaseAuth.currentUser();
-      if (user == null) {
-        firebaseAuth
-            .createUserWithEmailAndPassword(
-                email: _emailTextController.text,
-                password: _passwordTextController.text)
-            .then((user) => {
-              _userServices.createUser(
-            {
-            "username": _nameTextController.text,
-            "email": _emailTextController.text,
-            "userId": user.uid,
-            }
-        )
-        }).catchError((err) => {print('error is: '+ err.toString())});
-
-    Navigator.pushReplacement(
-    context, MaterialPageRoute(builder: (context) => HomePage()));
-
-      }
-    }
-  }
 }

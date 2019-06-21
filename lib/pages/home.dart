@@ -1,5 +1,6 @@
 import 'package:chat_app/commons/common.dart';
 import 'package:chat_app/pages/login.dart';
+import 'package:chat_app/provider/user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
@@ -7,6 +8,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 //my own imports
 import 'package:chat_app/componets/horizontal_listview.dart';
 import 'package:chat_app/componets/products.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,6 +19,8 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _searchController =  TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
+
     Widget image_carousel = new Container(
       height: 200.0,
       child:  new Carousel(
@@ -132,9 +136,7 @@ class _HomePageState extends State<HomePage> {
 
             InkWell(
               onTap: (){
-                FirebaseAuth.instance.signOut().then((value){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
-                });
+               user.signOut();
               },
               child: ListTile(
                 title: Text('Log out'),
