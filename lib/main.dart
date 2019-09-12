@@ -1,4 +1,5 @@
 import 'package:chat_app/pages/home.dart';
+import 'package:chat_app/pages/product_details.dart';
 import 'package:flutter/material.dart';
 import './pages/login.dart';
 
