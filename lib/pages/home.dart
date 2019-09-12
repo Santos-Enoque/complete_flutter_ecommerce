@@ -2,6 +2,7 @@ import 'package:chat_app/commons/common.dart';
 import 'package:chat_app/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 
 //my own imports
@@ -17,163 +18,296 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _searchController =  TextEditingController();
   @override
   Widget build(BuildContext context) {
-    Widget image_carousel = new Container(
-      height: 200.0,
-      child:  new Carousel(
-        boxFit: BoxFit.cover,
-        images: [
-          AssetImage('images/1.jpg'),
-          AssetImage('images/sale.png'),
-          AssetImage('images/c1.jpg'),
-          AssetImage('images/w4.jpeg'),
-          AssetImage('images/m2.jpg'),
-        ],
-        autoplay: false,
-        dotBgColor: Colors.transparent,
-        dotSize: 4.0,
-        indicatorBgPadding: 2.0,
-      ),
-    );
 
     return Scaffold(
-      appBar: new AppBar(
-        iconTheme: IconThemeData(color: deepOrange),
-        elevation: 0.1,
-        backgroundColor: white,
-        title: Material(
-          borderRadius: BorderRadius.circular(10.0),
-          color: Colors.grey[100],
-          elevation: 0.0,
-          child: TextFormField(
-            controller: _searchController,
-            decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(10.0),
-                hintText: "Search...",
-                border: InputBorder.none),
-            validator: (value) {
-              if (value.isEmpty) {
-                return "The search field cannot be empty";
-              }
-              return null;
-            },
-          ),
-        ),
-        actions: <Widget>[
 
-          new IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: deepOrange,
-              ),
-              onPressed: () {})
-        ],
-      ),
-      drawer: new Drawer(
-        child: new ListView(
+      body:  SafeArea(
+        child: ListView(
           children: <Widget>[
-//            header
-            new UserAccountsDrawerHeader(
-              accountName: Text('Santos Enoque'),
-              accountEmail: Text('santosenoque.ss@gmail.com'),
-              currentAccountPicture: GestureDetector(
-                child: new CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  child: Icon(Icons.person, color: Colors.white,),
+
+
+            Stack(
+              children: <Widget>[
+                Positioned(
+                  top: 10,
+                  right: 20,
+                  child: Align(
+                      alignment: Alignment.topRight,
+                      child: Icon(Icons.menu)),
+                ),
+
+                Positioned(
+                  top: 10,
+
+                  right: 60,
+                  child: Align(
+                      alignment: Alignment.topRight,
+                      child: Icon(Icons.shopping_cart)),
+                ),
+
+                Positioned(
+                  top: 10,
+
+                  right: 100,
+                  child: Align(
+                      alignment: Alignment.topRight,
+                      child: Icon(Icons.person)),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('What are\nyou Shopping for?', style: TextStyle(fontSize: 30, color: Colors.black.withOpacity(0.6), fontWeight: FontWeight.w400),),
+                ),
+              ],
+            ),
+
+            Padding(
+              padding: EdgeInsets.all(15),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey[50],
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5.0),
+                  ),
+                ),
+                child: TextField(
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    color: Colors.blueGrey[300],
+                  ),
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(10.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: BorderSide(color: Colors.white,),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white,),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    hintText: "E.g: formal dress",
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.blueGrey[300],
+                    ),
+                    hintStyle: TextStyle(
+                      fontSize: 15.0,
+                      color: Colors.blueGrey[300],
+                    ),
+                  ),
+                  maxLines: 1,
                 ),
               ),
-              decoration: new BoxDecoration(
-                  color: deepOrange
+            ),
+
+
+            Row(
+              children: <Widget>[
+                Padding(padding: const EdgeInsets.all(14.0),
+                  child: Container(
+                      alignment: Alignment.centerLeft,
+                      child: new Text('Featured products')),),
+              ],
+            ),
+
+
+            Container(
+           height: 230,
+           child: ListView.builder(
+             scrollDirection: Axis.horizontal,
+               itemCount: 4,
+               itemBuilder: (_, index){
+             return Padding(
+               padding: EdgeInsets.all(4),
+               child: Container(
+                 decoration: BoxDecoration(
+                   boxShadow: [
+                     BoxShadow(
+                       color:
+                       Color.fromARGB(62, 168, 174, 201),
+                       offset: Offset(0, 9),
+                       blurRadius: 14,
+                     ),
+                   ],
+                 ),
+                 child: ClipRRect(
+                   borderRadius: BorderRadius.circular(10),
+                   child: Stack(
+                     children: <Widget>[
+                       Image.asset(
+                         "images/m2.jpg",
+                         height: 220,
+                         width: 200,
+                         fit: BoxFit.cover,
+                       ),
+
+                       Align(
+                         alignment: Alignment.bottomCenter,
+                         child: Container(
+                             height: 100,
+                             width: 200,
+                             decoration: BoxDecoration(
+                               // Box decoration takes a gradient
+                               gradient: LinearGradient(
+                                 // Where the linear gradient begins and ends
+                                 begin: Alignment.bottomCenter,
+                                 end: Alignment.topCenter,
+                                 // Add one stop for each color. Stops should increase from 0 to 1
+                                 colors: [
+                                   // Colors are easy thanks to Flutter's Colors class.
+                                   Colors.black.withOpacity(0.8),
+                                   Colors.black.withOpacity(0.7),
+                                   Colors.black.withOpacity(0.6),
+                                   Colors.black.withOpacity(0.6),
+                                   Colors.black.withOpacity(0.4),
+                                   Colors.black.withOpacity(0.1),
+                                   Colors.black.withOpacity(0.05),
+                                   Colors.black.withOpacity(0.025),
+                                 ],
+                               ),
+                             ),
+
+                             child: Padding(
+                                 padding: const EdgeInsets.only(top: 8.0),
+                                 child: Container()
+                             )),
+                       ),
+
+                       Align(
+                         alignment: Alignment.bottomLeft,
+                         child: Padding(
+                             padding: const EdgeInsets.only(left:8.0),
+                             child: RichText(text: TextSpan(children: [
+                               TextSpan(text: 'Product blazer \n', style: TextStyle(fontSize: 18)),
+                               TextSpan(text: '\$12.99 \n', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+
+                             ]))
+                         ),
+                       )
+
+                     ],
+                   ),
+                 ),
+               ),
+             );
+
+           })
+         ),
+
+            Row(
+              children: <Widget>[
+                 Padding(padding: const EdgeInsets.all(14.0),
+                  child: Container(
+                      alignment: Alignment.centerLeft,
+                      child: new Text('Recent products')),),
+              ],
+            ),
+
+
+            Container(
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(
+                        "images/m2.jpg",
+                        height: 90,
+                        width: 70,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(width: 10,),
+
+                  RichText(text: TextSpan(
+                    children: [
+                      TextSpan(text: 'Winter blazer \n', style: TextStyle(fontSize: 20),),
+                      TextSpan(text: 'by: Brand X \n', style: TextStyle(fontSize: 16, color: Colors.grey),),
+
+                    TextSpan(text: '\$15.00 \t', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+                    TextSpan(text: 'ON SALE ' ,style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.red),),
+
+
+                    ], style: TextStyle(color: Colors.black)
+                  ),)
+                ],
               ),
             ),
 
-//            body
+            Container(
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(
+                        "images/m2.jpg",
+                        height: 90,
+                        width: 70,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
 
-            InkWell(
-              onTap: (){},
-              child: ListTile(
-                title: Text('Home Page'),
-                leading: Icon(Icons.home),
+                  SizedBox(width: 10,),
+
+                  RichText(text: TextSpan(
+                      children: [
+                        TextSpan(text: 'Winter blazer \n', style: TextStyle(fontSize: 20),),
+                        TextSpan(text: 'by: Brand X \n', style: TextStyle(fontSize: 16, color: Colors.grey),),
+
+                        TextSpan(text: '\$15.00 \t', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+                        TextSpan(text: 'ON SALE ' ,style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.red),),
+
+
+                      ], style: TextStyle(color: Colors.black)
+                  ),)
+                ],
               ),
             ),
 
-            InkWell(
-              onTap: (){},
-              child: ListTile(
-                title: Text('My account'),
-                leading: Icon(Icons.person),
+
+            Container(
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(
+                        "images/m2.jpg",
+                        height: 90,
+                        width: 70,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(width: 10,),
+
+                  RichText(text: TextSpan(
+                      children: [
+                        TextSpan(text: 'Winter blazer \n', style: TextStyle(fontSize: 20),),
+                        TextSpan(text: 'by: Brand X \n', style: TextStyle(fontSize: 16, color: Colors.grey),),
+
+                        TextSpan(text: '\$15.00 \t', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+                        TextSpan(text: 'ON SALE ' ,style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.red),),
+
+
+                      ], style: TextStyle(color: Colors.black)
+                  ),)
+                ],
               ),
             ),
 
-            InkWell(
-              onTap: (){},
-              child: ListTile(
-                title: Text('My Orders'),
-                leading: Icon(Icons.shopping_basket),
-              ),
-            ),
 
-            InkWell(
-              onTap: (){},
-              child: ListTile(
-                title: Text('Categoris'),
-                leading: Icon(Icons.dashboard),
-              ),
-            ),
-
-            InkWell(
-              onTap: (){},
-              child: ListTile(
-                title: Text('Favourites'),
-                leading: Icon(Icons.favorite),
-              ),
-            ),
-
-            Divider(),
-
-            InkWell(
-              onTap: (){
-                FirebaseAuth.instance.signOut().then((value){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
-                });
-              },
-              child: ListTile(
-                title: Text('Log out'),
-                leading: Icon(Icons.transit_enterexit, color: Colors.grey,),
-              ),
-            ),
 
           ],
         ),
-      ),
-
-      body: new Column(
-        children: <Widget>[
-          //image carousel begins here
-          image_carousel,
-
-//          //padding widget
-//          new Padding(padding: const EdgeInsets.all(4.0),
-//            child: Container(
-//                alignment: Alignment.centerLeft,
-//                child: new Text('Categories')),),
-//
-//          //Horizontal list view begins here
-//          HorizontalList(),
-
-          //padding widget
-          Row(
-            children: <Widget>[
-               Padding(padding: const EdgeInsets.all(14.0),
-                child: Container(
-                    alignment: Alignment.centerLeft,
-                    child: new Text('Recent products')),),
-            ],
-          ),
-
-          //grid view
-          Flexible(child: Products()),
-
-        ],
       ),
     );
   }
