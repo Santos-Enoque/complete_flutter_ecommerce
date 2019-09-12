@@ -9,7 +9,7 @@ Here we have the current UI for the user login (the Ui might be updated).
 <img src="images/img1.png">
 
 ## home page
-<img src="images/img.png">
+<img src="images/img2.png">
 
 
 ## Authors Information
