@@ -2,6 +2,7 @@ import 'package:chat_app/commons/common.dart';
 import 'package:chat_app/commons/loading.dart';
 import 'package:chat_app/pages/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import '../provider/user_provider.dart';
 
@@ -26,7 +27,7 @@ class _LoginState extends State<Login> {
         children: <Widget>[
           Container(
             child: Padding(
-              padding: const EdgeInsets.only(left:20, right:20.0, top: 120, bottom: 120),
+              padding: const EdgeInsets.all(0),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -41,17 +42,16 @@ class _LoginState extends State<Login> {
                 ),
                 child: Form(
                     key: _formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    child: ListView(
                       children: <Widget>[
+                        SizedBox(height: 40,),
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Container(
                               alignment: Alignment.topCenter,
-                              child: Image.asset(
-                                'images/cart.png',
-                                width: 120.0,
-//                height: 240.0,
+                              child: SvgPicture.asset(
+                                'images/login.svg',
+                                width: 260.0,
                               )),
                         ),
 
@@ -119,7 +119,7 @@ class _LoginState extends State<Login> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                               borderRadius: BorderRadius.circular(20.0),
-                              color: deepOrange,
+                              color: Colors.black,
                               elevation: 0.0,
                               child: MaterialButton(
                                 onPressed: () async{

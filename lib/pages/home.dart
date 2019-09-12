@@ -1,5 +1,6 @@
 import 'package:chat_app/commons/common.dart';
 import 'package:chat_app/pages/login.dart';
+import 'package:chat_app/pages/product_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';

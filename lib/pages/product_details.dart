@@ -196,9 +196,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 child: Text('XL', textAlign: TextAlign.center,style: TextStyle(color: Colors.white, fontSize: 17),),
                               ),),
                           ),
-
-
-
                         ],
                       ),
                     ),

@@ -7,6 +7,7 @@ import 'package:chat_app/pages/home.dart';
 import 'package:chat_app/provider/user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import '../db/users.dart';
 
@@ -33,7 +34,7 @@ class _SignUpState extends State<SignUp> {
       body: user.status == Status.Authenticating ? Loading() : Stack(
         children: <Widget>[
          Padding(
-              padding: const EdgeInsets.only(left:20, right:20.0, top: 80),
+              padding: const EdgeInsets.all(0),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -48,17 +49,16 @@ class _SignUpState extends State<SignUp> {
                 ),
                 child: Form(
                     key: _formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    child: ListView(
                       children: <Widget>[
+                        SizedBox(height: 40,),
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Container(
                               alignment: Alignment.topCenter,
-                              child: Image.asset(
-                                'images/cart.png',
-                                width: 120.0,
-//                height: 240.0,
+                              child: SvgPicture.asset(
+                                'images/signup.svg',
+                                width: 200.0,
                               )),
                         ),
                         Padding(
@@ -164,7 +164,7 @@ class _SignUpState extends State<SignUp> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                               borderRadius: BorderRadius.circular(20.0),
-                              color: deepOrange,
+                              color: Colors.black,
                               elevation: 0.0,
                               child: MaterialButton(
                                 onPressed: () async{
@@ -193,7 +193,7 @@ class _SignUpState extends State<SignUp> {
                                 child: Text(
                                   "I already have an account",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(color: deepOrange, fontSize: 16),
+                                  style: TextStyle(color: Colors.black, fontSize: 16),
                                 ))),
 
                         Padding(
