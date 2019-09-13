@@ -5,12 +5,13 @@ to check the admin side [Click here](https://github.com/Santos-Enoque/admin_side
 
 <img src="images/flutter_ecommerce.jpg">
 
-## Login Scren
+## Home Screen
+<img src="images/home.jpg">
 
-Here we have the current UI for the user login (the Ui might be updated).
-<img src="images/img1.png">
+## Sign in and Sign up Screens
+<img src="images/sign.jpg">
 
-## home page
+## Product details screen
 <img src="images/img2.png">
 
 
