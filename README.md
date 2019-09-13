@@ -3,6 +3,8 @@
 This is a flutter ecommerce app (still under development), and is only the user side of the app, 
 to check the admin side [Click here](https://github.com/Santos-Enoque/admin_side_flutter_ecommerce_app/tree/add_product).
 
+<img src="images/flutter_ecommerce.jpg">
+
 ## Login Scren
 
 Here we have the current UI for the user login (the Ui might be updated).
