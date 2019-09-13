@@ -1,12 +1,10 @@
-import 'package:chat_app/commons/common.dart';
-import 'package:chat_app/pages/signup.dart';
+import 'package:chat_app/screens/signup.dart';
+import 'package:chat_app/widgets/common.dart';
+import 'package:chat_app/widgets/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'home.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+import '../provider/user_provider.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -14,54 +12,22 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _passwordTextController = TextEditingController();
+  final _key = GlobalKey<ScaffoldState>();
 
-  SharedPreferences preferences;
-  bool loading = false;
-  bool isLogedin = false;
-
-  @override
-  void initState() {
-    super.initState();
-    isSignedIn();
-  }
-
-  void isSignedIn() async {
-    setState(() {
-      loading = true;
-    });
-
-    await firebaseAuth.currentUser().then((user) {
-      if (user != null) {
-        setState(() => isLogedin = true);
-      }
-    });
-    if (isLogedin) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
-    }
-
-    setState(() {
-      loading = false;
-    });
-  }
-
-
+  TextEditingController _email = TextEditingController();
+  TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height / 3;
+    final user = Provider.of<UserProvider>(context);
     return Scaffold(
-      body: Stack(
+      key: _key,
+      body:user.status == Status.Authenticating ? Loading() : Stack(
         children: <Widget>[
-
           Container(
             child: Padding(
-              padding: const EdgeInsets.only(left:20, right:20.0, top: 120, bottom: 120),
+              padding: const EdgeInsets.all(0),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -76,17 +42,16 @@ class _LoginState extends State<Login> {
                 ),
                 child: Form(
                     key: _formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    child: ListView(
                       children: <Widget>[
+                        SizedBox(height: 40,),
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Container(
                               alignment: Alignment.topCenter,
-                              child: Image.asset(
-                                'images/cart.png',
-                                width: 120.0,
-//                height: 240.0,
+                              child: SvgPicture.asset(
+                                'images/login.svg',
+                                width: 260.0,
                               )),
                         ),
 
@@ -100,7 +65,7 @@ class _LoginState extends State<Login> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12.0),
                               child: TextFormField(
-                                controller: _emailTextController,
+                                controller: _email,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Email",
@@ -131,7 +96,7 @@ class _LoginState extends State<Login> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12.0),
                               child: TextFormField(
-                                controller: _passwordTextController,
+                                controller: _password,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Password",
@@ -154,10 +119,15 @@ class _LoginState extends State<Login> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                               borderRadius: BorderRadius.circular(20.0),
-                              color: deepOrange,
+                              color: Colors.black,
                               elevation: 0.0,
                               child: MaterialButton(
-                                onPressed: () {},
+                                onPressed: () async{
+                                  if(_formKey.currentState.validate()){
+                                    if(!await user.signIn(_email.text, _password.text))
+                                      _key.currentState.showSnackBar(SnackBar(content: Text("Sign in failed")));
+                                  }
+                                },
                                 minWidth: MediaQuery.of(context).size.width,
                                 child: Text(
                                   "Login",
@@ -228,20 +198,9 @@ class _LoginState extends State<Login> {
               ),
             ),
           ),
-          Visibility(
-            visible: loading ?? true,
-            child: Center(
-              child: Container(
-                alignment: Alignment.center,
-                color: Colors.white.withOpacity(0.9),
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
-                ),
-              ),
-            ),
-          )
         ],
       ),
     );
   }
+
 }
