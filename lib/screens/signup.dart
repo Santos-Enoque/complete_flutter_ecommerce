@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:chat_app/commons/common.dart';
-import 'package:chat_app/commons/loading.dart';
 import 'package:chat_app/db/auth.dart';
-import 'package:chat_app/pages/home.dart';
 import 'package:chat_app/provider/user_provider.dart';
+import 'package:chat_app/widgets/common.dart';
+import 'package:chat_app/widgets/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import '../db/users.dart';
+import 'home.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -169,8 +169,11 @@ class _SignUpState extends State<SignUp> {
                               child: MaterialButton(
                                 onPressed: () async{
                                   if(_formKey.currentState.validate()){
-                                    if(!await user.signUp(_name.text ,_email.text, _password.text))
+                                    if(!await user.signUp(_name.text ,_email.text, _password.text)){
                                       _key.currentState.showSnackBar(SnackBar(content: Text("Sign up failed")));
+                                      return;
+                                    }
+                                    changeScreenReplacement(context, HomePage());
                                   }
                                 },
                                 minWidth: MediaQuery.of(context).size.width,

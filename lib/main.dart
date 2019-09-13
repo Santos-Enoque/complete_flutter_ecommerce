@@ -1,7 +1,7 @@
-import 'package:chat_app/pages/home.dart';
-import 'package:chat_app/pages/splash.dart';
+import 'package:chat_app/screens/home.dart';
+import 'package:chat_app/screens/login.dart';
+import 'package:chat_app/screens/splash.dart';
 import 'package:flutter/material.dart';
-import './pages/login.dart';
 import 'package:provider/provider.dart';
 import 'provider/user_provider.dart';
 

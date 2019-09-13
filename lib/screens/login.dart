@@ -1,6 +1,6 @@
-import 'package:chat_app/commons/common.dart';
-import 'package:chat_app/commons/loading.dart';
-import 'package:chat_app/pages/signup.dart';
+import 'package:chat_app/screens/signup.dart';
+import 'package:chat_app/widgets/common.dart';
+import 'package:chat_app/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';

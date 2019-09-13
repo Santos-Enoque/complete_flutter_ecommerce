@@ -20,6 +20,81 @@ class _ProductDetailsState extends State<ProductDetails> {
                   height: 350,
                   fit: BoxFit.cover,
                 ),
+
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        // Box decoration takes a gradient
+                        gradient: LinearGradient(
+                          // Where the linear gradient begins and ends
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          // Add one stop for each color. Stops should increase from 0 to 1
+                          colors: [
+                            // Colors are easy thanks to Flutter's Colors class.
+                            Colors.black.withOpacity(0.7),
+                            Colors.black.withOpacity(0.5),
+                            Colors.black.withOpacity(0.07),
+                            Colors.black.withOpacity(0.05),
+                            Colors.black.withOpacity(0.025),
+                          ],
+                        ),
+                      ),
+
+                      child: Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Container()
+                      )),
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                   Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: IconButton(icon: Icon(Icons.arrow_back_ios, color: Colors.white,), onPressed: (){
+                          Navigator.pop(context);
+                        })
+                      ),
+
+
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(4),
+                          child: Card(
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(Icons.shopping_cart),
+                            ),
+                          )
+                        ),
+
+                        Padding(
+                            padding: const EdgeInsets.all(4),
+                            child: Card(
+                              elevation: 10,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(Icons.favorite_border),
+                              ),
+                            )
+                        ),
+
+                      ],
+                    ),
+                  ],
+                ),
+
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
@@ -218,7 +293,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             onPressed: () {},
                             minWidth: MediaQuery.of(context).size.width,
                             child: Text(
-                              "Add to cart",
+                              "Buy now",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.black,

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:chat_app/db/users.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,7 +14,9 @@ class UserProvider with ChangeNotifier{
   Status _status = Status.Uninitialized;
   Status get status => _status;
   FirebaseUser get user => _user;
+  Firestore _firestore = Firestore.instance;
   UserServices _userServices = UserServices();
+
 
   UserProvider.initialize(): _auth = FirebaseAuth.instance{
     _auth.onAuthStateChanged.listen(_onStateChanged);
@@ -39,12 +42,11 @@ class UserProvider with ChangeNotifier{
       _status = Status.Authenticating;
       notifyListeners();
       await _auth.createUserWithEmailAndPassword(email: email, password: password).then((user){
-        Map<String, dynamic> values = {
-          "name":name,
-          "email":email,
-          "userId":user.uid
-        };
-        _userServices.createUser(values);
+        _firestore.collection('users').document(user.uid).setData({
+          'name':name,
+          'email':email,
+          'uid':user.uid
+        });
       });
       return true;
     }catch(e){
