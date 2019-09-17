@@ -1,96 +1,80 @@
 {
   "project_info": {
-    "project_number": "130034593582",
-    "firebase_url": "https://flutterfb-c451a.firebaseio.com",
-    "project_id": "flutterfb-c451a",
-    "storage_bucket": "flutterfb-c451a.appspot.com"
+    "project_number": "367488650258",
+    "firebase_url": "https://ecommerce-ada5d.firebaseio.com",
+    "project_id": "ecommerce-ada5d",
+    "storage_bucket": "ecommerce-ada5d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:130034593582:android:096cb5dab58bca60",
+        "mobilesdk_app_id": "1:367488650258:android:18d2f37935619d130d9ccb",
         "android_client_info": {
           "package_name": "com.santosenoque.chatapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "130034593582-kj0gvgofi0jaioqmrmdheu9fuq0u5fs4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.santosenoque.chatapp",
-            "certificate_hash": "d1de65707c7ebcf4d8e50a8d1f0c507a286c740d"
-          }
-        },
-        {
-          "client_id": "130034593582-6lm7eqkp3l0o0ql7rjggj7k5lpver585.apps.googleusercontent.com",
+          "client_id": "367488650258-3p3qembbsm374cuuh74atoqr4qutflms.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB0krkwbtyDdOxbiOqilKSztGYsZ6TUzl4"
+          "current_key": "AIzaSyBCSGvPtoSBTPmJxSfaVSDWdffCSz-GQq8"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "130034593582-6lm7eqkp3l0o0ql7rjggj7k5lpver585.apps.googleusercontent.com",
+              "client_id": "367488650258-3p3qembbsm374cuuh74atoqr4qutflms.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "367488650258-dr42sc9vk5mbcoq6sh888c850bju8jm0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.santosenoque.shopAppAdmin"
+              }
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:130034593582:android:7dafb784a413af93",
+        "mobilesdk_app_id": "1:367488650258:android:ca786232e79c2f08",
         "android_client_info": {
-          "package_name": "com.santosenoque.firebaseapp"
+          "package_name": "com.santosenoque.shop_app_admin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "130034593582-r3qs824ub3qqa0ruvkc0qqh2utcuou0a.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.santosenoque.firebaseapp",
-            "certificate_hash": "d1de65707c7ebcf4d8e50a8d1f0c507a286c740d"
-          }
-        },
-        {
-          "client_id": "130034593582-6lm7eqkp3l0o0ql7rjggj7k5lpver585.apps.googleusercontent.com",
+          "client_id": "367488650258-3p3qembbsm374cuuh74atoqr4qutflms.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB0krkwbtyDdOxbiOqilKSztGYsZ6TUzl4"
+          "current_key": "AIzaSyBCSGvPtoSBTPmJxSfaVSDWdffCSz-GQq8"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "130034593582-6lm7eqkp3l0o0ql7rjggj7k5lpver585.apps.googleusercontent.com",
+              "client_id": "367488650258-3p3qembbsm374cuuh74atoqr4qutflms.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "367488650258-dr42sc9vk5mbcoq6sh888c850bju8jm0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.santosenoque.shopAppAdmin"
+              }
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
