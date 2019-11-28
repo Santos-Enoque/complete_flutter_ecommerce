@@ -50,20 +50,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            ProductCard(
-              brand: 'SantosBrand',
-              name: 'Lux Blazer',
-              price: 24.00,
-              onSale: true,
-              picture: '',
-            ),
-            ProductCard(
-              brand: 'SantosBrand',
-              name: 'Lux Blazer',
-              price: 24.00,
-              onSale: true,
-              picture: '',
-            ),
+     
             ProductCard(
               brand: 'SantosBrand',
               name: 'Lux Blazer',
