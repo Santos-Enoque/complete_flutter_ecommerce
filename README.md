@@ -11,8 +11,6 @@ to check the admin side [Click here](https://github.com/Santos-Enoque/admin_side
 ## Sign in and Sign up Screens
 <img src="images/sign.jpg">
 
-## Product details screen
-<img src="images/img2.png">
 
 
 ## Authors Information

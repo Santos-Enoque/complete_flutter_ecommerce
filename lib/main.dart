@@ -1,3 +1,4 @@
+import 'package:chat_app/provider/app_provider.dart';
 import 'package:chat_app/screens/home.dart';
 import 'package:chat_app/screens/login.dart';
 import 'package:chat_app/screens/splash.dart';
@@ -6,7 +7,13 @@ import 'package:provider/provider.dart';
 import 'provider/user_provider.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(builder: (_) => UserProvider.initialize(),
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider.value(value: UserProvider.initialize()),
+    ChangeNotifierProvider.value(value: AppProvider()),
+
+  ],
   child: MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
