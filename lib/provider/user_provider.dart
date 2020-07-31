@@ -42,10 +42,10 @@ class UserProvider with ChangeNotifier{
       _status = Status.Authenticating;
       notifyListeners();
       await _auth.createUserWithEmailAndPassword(email: email, password: password).then((user){
-        _firestore.collection('users').document(user.uid).setData({
+        _firestore.collection('users').document(user.user.uid).setData({
           'name':name,
           'email':email,
-          'uid':user.uid
+          'uid':user.user.uid
         });
       });
       return true;

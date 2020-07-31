@@ -6,14 +6,16 @@ import 'package:provider/provider.dart';
 import 'provider/user_provider.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(builder: (_) => UserProvider.initialize(),
-  child: MaterialApp(
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider.value(value: UserProvider.initialize())
+  ], child: MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
         primaryColor: Colors.deepOrange
     ),
     home: ScreensController(),
-  )));
+  ),));
 }
 
 class ScreensController extends StatelessWidget {
