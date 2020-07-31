@@ -170,27 +170,27 @@ class _LoginState extends State<Login> {
                           ],
                         ),
 
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("or sign in with", style: TextStyle(fontSize: 18,color: Colors.grey),),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: MaterialButton(
-                                    onPressed: () {},
-                                    child: Image.asset("images/ggg.png", width: 30,)
-                                ),
-                              ),
-
-                            ],
-                          ),
-                        ),
+//                        Padding(
+//                          padding: const EdgeInsets.all(16.0),
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: <Widget>[
+//
+//                              Padding(
+//                                padding: const EdgeInsets.all(8.0),
+//                                child: Text("or sign in with", style: TextStyle(fontSize: 18,color: Colors.grey),),
+//                              ),
+//                              Padding(
+//                                padding: const EdgeInsets.all(8.0),
+//                                child: MaterialButton(
+//                                    onPressed: () {},
+//                                    child: Image.asset("images/ggg.png", width: 30,)
+//                                ),
+//                              ),
+//
+//                            ],
+//                          ),
+//                        ),
 
                       ],
                     )),
