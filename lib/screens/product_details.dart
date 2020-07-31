@@ -1,3 +1,4 @@
+import 'package:chat_app/helpers/style.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -16,7 +17,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             Stack(
               children: <Widget>[
                 Image.asset(
-                  "images/m2.jpg",
+                  "images/m1.jpeg",
                   height: 350,
                   fit: BoxFit.cover,
                 ),
@@ -49,51 +50,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                       )),
                 ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                   Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: IconButton(icon: Icon(Icons.arrow_back_ios, color: Colors.white,), onPressed: (){
-                          Navigator.pop(context);
-                        })
-                      ),
-
-
-                    Row(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(4),
-                          child: Card(
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(Icons.shopping_cart),
-                            ),
-                          )
-                        ),
-
-                        Padding(
-                            padding: const EdgeInsets.all(4),
-                            child: Card(
-                              elevation: 10,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(Icons.favorite_border),
-                              ),
-                            )
-                        ),
-
-                      ],
-                    ),
-                  ],
-                ),
 
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -143,6 +99,60 @@ class _ProductDetailsState extends State<ProductDetails> {
                         ],
                       ),
                     )),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+
+
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: const EdgeInsets.all(4),
+                            child: Card(
+                              elevation: 10,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(Icons.shopping_cart),
+                              ),
+                            )
+                        ),
+
+                      ],
+                    ),
+                  ],
+                ),
+
+                Positioned.fill(
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                            color: red,
+                            borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(35)
+                            )
+                        ),
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                          child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: IconButton(icon: Icon(Icons.close, color: Colors.white,), onPressed: (){
+                              })
+                          ),
+                        ),
+                      ),
+
+
+                    ],
+                  ),
+                ),
+
 
               ],
             ),
@@ -293,7 +303,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             onPressed: () {},
                             minWidth: MediaQuery.of(context).size.width,
                             child: Text(
-                              "Buy now",
+                              "Add to cart",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.black,
@@ -302,6 +312,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ),
                           )),
                     ),
+
+                    SizedBox(
+                      height: 20,
+                    )
 
                   ],
                 ),

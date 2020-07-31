@@ -12,7 +12,7 @@ void main() {
   ], child: MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
-        primaryColor: Colors.deepOrange
+        primaryColor: Colors.white
     ),
     home: ScreensController(),
   ),));

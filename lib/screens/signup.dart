@@ -1,14 +1,9 @@
-import 'dart:async';
-
-import 'package:chat_app/db/auth.dart';
+import 'package:chat_app/helpers/common.dart';
+import 'package:chat_app/helpers/style.dart';
 import 'package:chat_app/provider/user_provider.dart';
-import 'package:chat_app/widgets/common.dart';
 import 'package:chat_app/widgets/loading.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import '../db/users.dart';
 import 'home.dart';
 
 class SignUp extends StatefulWidget {
@@ -37,7 +32,7 @@ class _SignUpState extends State<SignUp> {
               padding: const EdgeInsets.all(0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -56,9 +51,9 @@ class _SignUpState extends State<SignUp> {
                           padding: const EdgeInsets.all(16.0),
                           child: Container(
                               alignment: Alignment.topCenter,
-                              child: SvgPicture.asset(
-                                'images/signup.svg',
-                                width: 200.0,
+                              child: Image.asset(
+                                'images/logo.png',
+                                width: 260.0,
                               )),
                         ),
                         Padding(
@@ -66,7 +61,7 @@ class _SignUpState extends State<SignUp> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.grey.withOpacity(0.2),
+                            color: Colors.grey.withOpacity(0.3),
                             elevation: 0.0,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12.0),
@@ -126,7 +121,7 @@ class _SignUpState extends State<SignUp> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.grey.withOpacity(0.2),
+                            color: Colors.grey.withOpacity(0.3),
                             elevation: 0.0,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12.0),
@@ -151,7 +146,7 @@ class _SignUpState extends State<SignUp> {
                                     icon: Icon(Icons.remove_red_eye),
                                     onPressed: () {
                                       setState(() {
-                                        hidePass = false;
+                                        hidePass = !hidePass;
                                       });
                                     }),
                               ),
@@ -199,29 +194,7 @@ class _SignUpState extends State<SignUp> {
                                   style: TextStyle(color: Colors.black, fontSize: 16),
                                 ))),
 
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
 
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("Or sign up with", style: TextStyle(fontSize: 18,color: Colors.grey),),
-                              ),
-                              Padding(
-                                padding:
-                                const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
-                                child: Material(
-                                    child: MaterialButton(
-                                        onPressed: () async{
-                                        },
-                                        child: Image.asset("images/ggg.png", width: 30,)
-                                    )),
-                              ),
-                            ],
-                          ),
-                        ),
                       ],
                     )),
               ),

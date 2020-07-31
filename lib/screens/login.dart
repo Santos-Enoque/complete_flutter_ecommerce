@@ -1,8 +1,7 @@
+import 'package:chat_app/helpers/style.dart';
 import 'package:chat_app/screens/signup.dart';
-import 'package:chat_app/widgets/common.dart';
 import 'package:chat_app/widgets/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import '../provider/user_provider.dart';
 
@@ -30,7 +29,7 @@ class _LoginState extends State<Login> {
               padding: const EdgeInsets.all(0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -49,8 +48,8 @@ class _LoginState extends State<Login> {
                           padding: const EdgeInsets.all(16.0),
                           child: Container(
                               alignment: Alignment.topCenter,
-                              child: SvgPicture.asset(
-                                'images/login.svg',
+                              child: Image.asset(
+                                'images/logo.png',
                                 width: 260.0,
                               )),
                         ),
@@ -60,7 +59,7 @@ class _LoginState extends State<Login> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.grey.withOpacity(0.2),
+                            color: Colors.grey.withOpacity(0.3),
                             elevation: 0.0,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12.0),
@@ -91,7 +90,7 @@ class _LoginState extends State<Login> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.grey.withOpacity(0.2),
+                            color: Colors.grey.withOpacity(0.3),
                             elevation: 0.0,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12.0),
@@ -170,27 +169,27 @@ class _LoginState extends State<Login> {
                           ],
                         ),
 
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("or sign in with", style: TextStyle(fontSize: 18,color: Colors.grey),),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: MaterialButton(
-                                    onPressed: () {},
-                                    child: Image.asset("images/ggg.png", width: 30,)
-                                ),
-                              ),
-
-                            ],
-                          ),
-                        ),
+//                        Padding(
+//                          padding: const EdgeInsets.all(16.0),
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.center,
+//                            children: <Widget>[
+//
+//                              Padding(
+//                                padding: const EdgeInsets.all(8.0),
+//                                child: Text("or sign in with", style: TextStyle(fontSize: 18,color: Colors.grey),),
+//                              ),
+//                              Padding(
+//                                padding: const EdgeInsets.all(8.0),
+//                                child: MaterialButton(
+//                                    onPressed: () {},
+//                                    child: Image.asset("images/ggg.png", width: 30,)
+//                                ),
+//                              ),
+//
+//                            ],
+//                          ),
+//                        ),
 
                       ],
                     )),
