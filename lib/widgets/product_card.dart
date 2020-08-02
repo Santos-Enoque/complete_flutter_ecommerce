@@ -1,15 +1,12 @@
 import 'package:chat_app/helpers/style.dart';
+import 'package:chat_app/models/product.dart';
+import 'package:chat_app/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
-  final String name;
-  final double price;
-  final String picture;
-  final String brand;
-  final bool onSale;
+  final ProductModel product;
 
-
-  ProductCard({@required this.name,@required this.price,@required this.picture,@required this.brand,@required this.onSale});
+  const ProductCard({Key key, this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,27 +24,16 @@ class ProductCard extends StatelessWidget {
             ]),
         child: Row(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  "images/m2.jpg",
-                  height: 140,
-                  width: 120,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+             _productImage(product.picture),
 
             SizedBox(width: 10,),
 
             RichText(text: TextSpan(
                 children: [
-                  TextSpan(text: '$name \n', style: TextStyle(fontSize: 20),),
-                  TextSpan(text: 'by: $brand \n\n\n\n', style: TextStyle(fontSize: 16, color: Colors.grey),),
+                  TextSpan(text: '${product.name} \n', style: TextStyle(fontSize: 20),),
+                  TextSpan(text: 'by: ${product.brand} \n\n\n\n', style: TextStyle(fontSize: 16, color: Colors.grey),),
 
-                  TextSpan(text: '\$${price.toString()} \t', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+                  TextSpan(text: '\$${product.price / 100} \t', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
                   TextSpan(text: 'ON SALE ' ,style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.red),),
 
 
@@ -57,5 +43,26 @@ class ProductCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _productImage(String picture) {
+    if(picture == null){
+      return Container(
+        child: CustomText(text: "No Image"),
+      );
+    }else{
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.network(
+            product.picture,
+            height: 140,
+            width: 120,
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
+    }
   }
 }

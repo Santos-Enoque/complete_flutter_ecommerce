@@ -1,9 +1,9 @@
 import 'package:chat_app/helpers/style.dart';
+import 'package:chat_app/provider/user.dart';
 import 'package:chat_app/screens/signup.dart';
 import 'package:chat_app/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../provider/user_provider.dart';
 
 class Login extends StatefulWidget {
   @override
