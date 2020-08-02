@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:chat_app/db/users.dart';
+import 'package:chat_app/services/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
