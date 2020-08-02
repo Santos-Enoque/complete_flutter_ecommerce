@@ -44,6 +44,7 @@ class FeaturedCard extends StatelessWidget {
                       height: 100,
                       width: 200,
                       decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
                         // Box decoration takes a gradient
                         gradient: LinearGradient(
                           // Where the linear gradient begins and ends
