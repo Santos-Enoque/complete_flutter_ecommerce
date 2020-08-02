@@ -104,7 +104,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
 
-
+                        
                     Row(
                       children: <Widget>[
                         Padding(
@@ -120,7 +120,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ),
                             )
                         ),
-
                       ],
                     ),
                   ],
