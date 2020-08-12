@@ -14,6 +14,8 @@ class UserModel {
   String _email;
   String _id;
   String _stripeId;
+  int _priceSum = 0;
+
 
 //  getters
   String get name => _name;
@@ -26,6 +28,8 @@ class UserModel {
 
   // public variables
   List<CartItemModel> cart;
+  int totalCartPrice;
+
 
 
   UserModel.fromSnapshot(DocumentSnapshot snapshot) {
@@ -33,7 +37,9 @@ class UserModel {
     _email = snapshot.data[EMAIL];
     _id = snapshot.data[ID];
     _stripeId = snapshot.data[STRIPE_ID] ?? "";
-    cart = _convertCartItems(snapshot.data[CART]) ?? [];
+    cart = _convertCartItems(snapshot.data[CART]?? []);
+    totalCartPrice = snapshot.data[CART] == null ? 0 :getTotalPrice(cart: snapshot.data[CART]);
+
   }
 
   List<CartItemModel> _convertCartItems(List cart){
@@ -42,5 +48,17 @@ class UserModel {
       convertedCart.add(CartItemModel.fromMap(cartItem));
     }
     return convertedCart;
+  }
+
+  int getTotalPrice({List cart}){
+    if(cart == null){
+      return 0;
+    }
+    for(Map cartItem in cart){
+      _priceSum += cartItem["price"];
+    }
+
+    int total = _priceSum;
+    return total;
   }
 }

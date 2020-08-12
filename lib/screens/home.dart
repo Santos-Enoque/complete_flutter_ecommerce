@@ -1,12 +1,19 @@
+import 'package:chat_app/helpers/common.dart';
 import 'package:chat_app/helpers/style.dart';
 import 'package:chat_app/provider/product.dart';
 import 'package:chat_app/provider/user.dart';
+import 'package:chat_app/screens/product_search.dart';
+import 'package:chat_app/services/product.dart';
 import 'package:chat_app/widgets/custom_text.dart';
 import 'package:chat_app/widgets/featured_products.dart';
 import 'package:chat_app/widgets/product_card.dart';
 import 'package:chat_app/widgets/search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
+
+import 'cart.dart';
+import 'order.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,7 +21,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final key = GlobalKey<ScaffoldState>();
+  final _key = GlobalKey<ScaffoldState>();
+  ProductServices _productServices = ProductServices();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     final productProvider = Provider.of<ProductProvider>(context);
 
     return Scaffold(
-      key: key,
+      key: _key,
       backgroundColor: white,
       endDrawer: Drawer(
         child: ListView(
@@ -40,6 +48,15 @@ class _HomePageState extends State<HomePage> {
                 color: white,
               ),
             ),
+            ListTile(
+              onTap: () async{
+                await userProvider.getOrders();
+                changeScreen(context, OrdersScreen());
+              },
+              leading: Icon(Icons.bookmark_border),
+              title: CustomText(text: "My orders"),
+            ),
+
             ListTile(
               onTap: () {
 //                userProvider.signOut();
@@ -63,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                       alignment: Alignment.topRight,
                       child: GestureDetector(
                           onTap: () {
-                            key.currentState.openEndDrawer();
+                            _key.currentState.openEndDrawer();
                           },
                           child: Icon(Icons.menu))),
                 ),
@@ -72,13 +89,22 @@ class _HomePageState extends State<HomePage> {
                   right: 60,
                   child: Align(
                       alignment: Alignment.topRight,
-                      child: Icon(Icons.shopping_cart)),
+                      child: GestureDetector(
+                          onTap: (){
+                            changeScreen(context, CartScreen());
+                          },
+                          child: Icon(Icons.shopping_cart))),
                 ),
                 Positioned(
                   top: 10,
                   right: 100,
                   child: Align(
-                      alignment: Alignment.topRight, child: Icon(Icons.person)),
+                      alignment: Alignment.topRight, child: GestureDetector(
+                      onTap: (){
+                        _key.currentState.showSnackBar(SnackBar(
+                            content: Text("User profile")));
+                      },
+                      child: Icon(Icons.person))),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -94,7 +120,42 @@ class _HomePageState extends State<HomePage> {
             ),
 
 //          Search Text field
-            Search(),
+//            Search(),
+
+            Container(
+              decoration: BoxDecoration(
+                  color: white,
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(20))),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    top: 8, left: 8, right: 8, bottom: 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: grey.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.search,
+                      color: black,
+                    ),
+                    title: TextField(
+                      textInputAction: TextInputAction.search,
+                      onSubmitted: (pattern)async{
+                        await productProvider.search(productName: pattern);
+                        changeScreen(context, ProductSearchScreen());
+                      },
+                      decoration: InputDecoration(
+                        hintText: "blazer, dress...",
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
 
 //            featured products
             Row(

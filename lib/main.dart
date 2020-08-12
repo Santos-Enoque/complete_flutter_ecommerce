@@ -1,3 +1,4 @@
+import 'package:chat_app/provider/app.dart';
 import 'package:chat_app/provider/product.dart';
 import 'package:chat_app/provider/user.dart';
 import 'package:chat_app/screens/home.dart';
@@ -11,6 +12,8 @@ void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider.value(value: UserProvider.initialize()),
     ChangeNotifierProvider.value(value: ProductProvider.initialize()),
+    ChangeNotifierProvider.value(value: AppProvider()),
+
 
   ], child: MaterialApp(
     debugShowCheckedModeBanner: false,
