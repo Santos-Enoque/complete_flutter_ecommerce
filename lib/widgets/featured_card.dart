@@ -1,6 +1,9 @@
+import 'package:chat_app/helpers/common.dart';
 import 'package:chat_app/models/product.dart';
 import 'package:chat_app/screens/product_details.dart';
+import 'package:chat_app/widgets/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class FeaturedCard extends StatelessWidget {
   final ProductModel product;
@@ -14,7 +17,7 @@ class FeaturedCard extends StatelessWidget {
       padding: EdgeInsets.all(4),
       child: InkWell(
         onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (_)=> ProductDetails()));
+          changeScreen(context, ProductDetails(product: product,));
         },
         child: Container(
           decoration: BoxDecoration(
@@ -31,11 +34,19 @@ class FeaturedCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             child: Stack(
               children: <Widget>[
-                Image.network(
-                  product.picture,
-                  height: 220,
-                  width: 200,
-                  fit: BoxFit.cover,
+                Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Loading(),
+                    )),
+                Center(
+                  child: FadeInImage.memoryNetwork(
+                    placeholder: kTransparentImage,
+                    image: product.picture,
+                    fit: BoxFit.cover,
+                    height: 220,
+                    width: 200,
+                  ),
                 ),
 
                 Align(

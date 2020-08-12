@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:chat_app/models/cart_item.dart';
+import 'package:chat_app/models/product.dart';
 import 'package:chat_app/models/user.dart';
 import 'package:chat_app/services/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
 
 enum Status{Uninitialized, Authenticated, Authenticating, Unauthenticated}
 
@@ -13,7 +16,6 @@ class UserProvider with ChangeNotifier{
   FirebaseAuth _auth;
   FirebaseUser _user;
   Status _status = Status.Uninitialized;
-  Firestore _firestore = Firestore.instance;
   UserServices _userServices = UserServices();
   UserModel _userModel;
 
@@ -80,5 +82,37 @@ class UserProvider with ChangeNotifier{
       _status = Status.Authenticated;
     }
     notifyListeners();
+  }
+
+  Future<bool> addToCart({ProductModel product, String size, String color})async{
+    try{
+      var uuid = Uuid();
+      String cartItemId = uuid.v4();
+      List<CartItemModel> cart = _userModel.cart;
+
+      Map cartItem ={
+        "id": cartItemId,
+        "name": product.name,
+        "image": product.picture,
+        "productId": product.id,
+        "price": product.price,
+        "size": size,
+        "color": color
+      };
+
+      CartItemModel item = CartItemModel.fromMap(cartItem);
+//      if(!itemExists){
+      print("CART ITEMS ARE: ${cart.toString()}");
+      _userServices.addToCart(userId: _user.uid, cartItem: item);
+//      }
+
+
+
+      return true;
+    }catch(e){
+      print("THE ERROR ${e.toString()}");
+      return false;
+    }
+
   }
 }
