@@ -19,6 +19,38 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+
+    Widget formLabel(TextEditingController txtCtrl , String hintName, Icon iconName){
+      return Padding(
+        padding:
+        const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+        child: Material(
+          borderRadius: BorderRadius.circular(10.0),
+          color: Colors.grey.withOpacity(0.3),
+          elevation: 0.0,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 12.0),
+            child: TextFormField(
+              controller: txtCtrl,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: hintName,
+                icon: iconName,
+              ),
+//              validator: (value) {
+//                if (value.isEmpty) {
+//                  return "This field cannot be empty";
+//                } else if (value.length < 6) {
+//                  return "the password has to be at least 6 characters long";
+//                }
+//                return null;
+//              },
+            ),
+          ),
+        ),
+      );
+    }
+
     final user = Provider.of<UserProvider>(context);
     return Scaffold(
       key: _key,
@@ -54,65 +86,9 @@ class _LoginState extends State<Login> {
                               )),
                         ),
 
-                        Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
-                          child: Material(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.grey.withOpacity(0.3),
-                            elevation: 0.0,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 12.0),
-                              child: TextFormField(
-                                controller: _email,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Email",
-                                  icon: Icon(Icons.alternate_email),
-                                ),
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    Pattern pattern =
-                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                    RegExp regex = new RegExp(pattern);
-                                    if (!regex.hasMatch(value))
-                                      return 'Please make sure your email address is valid';
-                                    else
-                                      return null;
-                                  }
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
-                          child: Material(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.grey.withOpacity(0.3),
-                            elevation: 0.0,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 12.0),
-                              child: TextFormField(
-                                controller: _password,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Password",
-                                  icon: Icon(Icons.lock_outline),
-                                ),
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return "The password field cannot be empty";
-                                  } else if (value.length < 6) {
-                                    return "the password has to be at least 6 characters long";
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
+                        formLabel(_email,"Email",Icon(Icons.alternate_email)),
+                        formLabel(_password,"Password",Icon(Icons.lock_outline)),
+
                         Padding(
                           padding:
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
