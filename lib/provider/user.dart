@@ -6,7 +6,7 @@ import 'package:chat_app/models/product.dart';
 import 'package:chat_app/models/user.dart';
 import 'package:chat_app/services/order.dart';
 import 'package:chat_app/services/users.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,7 +16,7 @@ enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
 class UserProvider with ChangeNotifier {
   FirebaseAuth _auth;
-  FirebaseUser _user;
+  User _user;
   Status _status = Status.Uninitialized;
   UserServices _userServices = UserServices();
   OrderServices _orderServices = OrderServices();
@@ -28,13 +28,13 @@ class UserProvider with ChangeNotifier {
 
   Status get status => _status;
 
-  FirebaseUser get user => _user;
+  User get user => _user;
 
   // public variables
   List<OrderModel> orders = [];
 
   UserProvider.initialize() : _auth = FirebaseAuth.instance {
-    _auth.onAuthStateChanged.listen(_onStateChanged);
+    _auth.authStateChanges().listen(_onStateChanged);
   }
 
   Future<bool> signIn(String email, String password) async {
@@ -58,12 +58,13 @@ class UserProvider with ChangeNotifier {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((user) {
-        _userServices.createUser({
-          'name': name,
-          'email': email,
-          'uid': user.user.uid,
-          'stripeId': ''
-        });
+            print(user);
+            _userServices.createUser({
+              'name': name,
+              'email': email,
+              'uid': user.user.uid,
+              'stripeId': ''
+            });
       });
       return true;
     } catch (e) {
@@ -81,7 +82,7 @@ class UserProvider with ChangeNotifier {
     return Future.delayed(Duration.zero);
   }
 
-  Future<void> _onStateChanged(FirebaseUser user) async {
+  _onStateChanged(User user) async {
     if (user == null) {
       _status = Status.Unauthenticated;
     } else {
@@ -110,10 +111,10 @@ class UserProvider with ChangeNotifier {
       };
 
       CartItemModel item = CartItemModel.fromMap(cartItem);
-//      if(!itemExists){
+    //      if(!itemExists){
       print("CART ITEMS ARE: ${cart.toString()}");
       _userServices.addToCart(userId: _user.uid, cartItem: item);
-//      }
+    //      }
 
       return true;
     } catch (e) {
