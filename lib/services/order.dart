@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OrderServices{
   String collection = "orders";
-  Firestore _firestore = Firestore.instance;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   void createOrder({String userId ,String id,String description,String status ,List<CartItemModel> cart, int totalPrice}) {
     List<Map> convertedCart = [];
@@ -13,7 +13,7 @@ class OrderServices{
       convertedCart.add(item.toMap());
     }
 
-    _firestore.collection(collection).document(id).setData({
+    _firestore.collection(collection).doc(id).set({
       "userId": userId,
       "id": id,
       "cart": convertedCart,
@@ -28,10 +28,10 @@ class OrderServices{
       _firestore
           .collection(collection)
           .where("userId", isEqualTo: userId)
-          .getDocuments()
+          .get()
           .then((result) {
         List<OrderModel> orders = [];
-        for (DocumentSnapshot order in result.documents) {
+        for (DocumentSnapshot order in result.docs) {
           orders.add(OrderModel.fromSnapshot(order));
         }
         return orders;

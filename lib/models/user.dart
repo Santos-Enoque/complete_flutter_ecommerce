@@ -33,12 +33,13 @@ class UserModel {
 
 
   UserModel.fromSnapshot(DocumentSnapshot snapshot) {
-    _name = snapshot.data[NAME];
-    _email = snapshot.data[EMAIL];
-    _id = snapshot.data[ID];
-    _stripeId = snapshot.data[STRIPE_ID] ?? "";
-    cart = _convertCartItems(snapshot.data[CART]?? []);
-    totalCartPrice = snapshot.data[CART] == null ? 0 :getTotalPrice(cart: snapshot.data[CART]);
+    print(snapshot.data());
+    _name = snapshot.data()[NAME];
+    _email = snapshot.data()[EMAIL];
+    _id = snapshot.data()[ID];
+    _stripeId = snapshot.data()[STRIPE_ID] ?? "";
+    cart = _convertCartItems(snapshot.data()[CART]?? []);
+    totalCartPrice = snapshot.data()[CART] == null ? 0 :getTotalPrice(cart: snapshot.data()[CART]);
 
   }
 
