@@ -18,7 +18,7 @@ dependencies:
   carousel_pro: ^0.0.13
   firebase_auth:
   google_sign_in:
-  cloud_firestore:
+  cloud_firestore: ^0.13.0+1
   firebase_storage:
   fluttertoast:
   shared_preferences:

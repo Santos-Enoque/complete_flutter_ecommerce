@@ -41,7 +41,10 @@ class UserProvider with ChangeNotifier {
     try {
       _status = Status.Authenticating;
       notifyListeners();
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      await _auth.signInWithEmailAndPassword(email: email, password: password).then((value) async{
+        _userModel = await _userServices.getUserById(value.user.uid);
+        notifyListeners();
+      });
       return true;
     } catch (e) {
       _status = Status.Unauthenticated;
@@ -57,13 +60,17 @@ class UserProvider with ChangeNotifier {
       notifyListeners();
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
-          .then((user) {
+          .then((user) async{
+            print("CREATE USER");
         _userServices.createUser({
           'name': name,
           'email': email,
           'uid': user.user.uid,
           'stripeId': ''
         });
+            _userModel = await _userServices.getUserById(user.user.uid);
+            notifyListeners();
+
       });
       return true;
     } catch (e) {
